@@ -7,4 +7,4 @@ require "common"
 require "plugins"
 require "colors"
 require "mappings"
-
+require "lsp_ccls"
