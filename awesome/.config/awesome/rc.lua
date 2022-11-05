@@ -125,9 +125,51 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- Keyboard map indicator and switcher
 mykeyboardlayout = awful.widget.keyboardlayout()
 
+local keyboard_layout = require("keyboard_layout")
+local kbdcfg = keyboard_layout.kbdcfg({type = "gui"})
+
+-- kbdcfg.add_primary_layout("Latam", "ES", "es")
+-- kbdcfg.add_primary_layout("English", "US", "us")
+kbdcfg.add_primary_layout("English", beautiful.en_layout, "us")
+kbdcfg.add_primary_layout("Latam", beautiful.latam_layout, "latam")
+kbdcfg.bind()
+
+-- Mouse bindings
+kbdcfg.widget:buttons(
+ awful.util.table.join(awful.button({ }, 1, function () kbdcfg.switch_next() end),
+                       awful.button({ }, 3, function () kbdcfg.menu:toggle() end))
+)
+
+globalkeys = awful.util.table.join(globalkeys,
+    -- Shift-Alt to change keyboard layout
+    awful.key({modkey, "Mod1"}, "k", function () kbdcfg.switch_next() end,
+    {description = "Change keyboard layout", group = "global"})
+    -- Alt-Shift to change keyboard layout
+    -- awful.key({"Mod1"}, "Shift_L", function () kbdcfg.switch_next() end)
+)
+
 -- {{{ Wibar
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
+
+local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
+-- ...
+-- Create a textclock widget
+mytextclock = wibox.widget.textclock()
+-- or customized
+local cw = calendar_widget({
+	theme = 'outrun',
+	placement = 'bottom_right',
+	start_sunday = true,
+	radius = 8,
+	-- with customized next/previous (see table above)
+	previous_month_button = 1,
+	next_month_button = 3,
+})
+mytextclock:connect_signal("button::press",
+function(_, _, _, button)
+	if button == 1 then cw.toggle() end
+end)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -184,6 +226,14 @@ end
 -- Re-set wallpaper when a screen's geometry changes (e.g. different resolution)
 screen.connect_signal("property::geometry", set_wallpaper)
 
+-- battery widget
+local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
+
+-- Volume widget
+local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
+-- todo widget
+local todo_widget = require("awesome-wm-widgets.todo-widget.todo")
+
 awful.screen.connect_for_each_screen(function(s)
     -- Wallpaper
     set_wallpaper(s)
@@ -230,9 +280,20 @@ awful.screen.connect_for_each_screen(function(s)
         s.mytasklist, -- Middle widget
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
+	    todo_widget(),
+	    batteryarc_widget({
+		    size = 25,
+		    show_current_level = true,
+		    arc_thickness = 2,
+	    }),
+	    kbdcfg.widget,
             mykeyboardlayout,
             wibox.widget.systray(),
             mytextclock,
+	    volume_widget{
+		    size = 25,
+		    widget_type = 'arc'
+	    },
             s.mylayoutbox,
         },
     }
@@ -348,7 +409,14 @@ globalkeys = gears.table.join(
               {description = "lua execute prompt", group = "awesome"}),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
-              {description = "show the menubar", group = "launcher"})
+              {description = "show the menubar", group = "launcher"}),
+    -- Multimedia
+    awful.key({}, "XF86AudioRaiseVolume", function() volume_widget:inc(5) end,
+    	      {description = "Increase volume", group = "Multimedia"}),
+    awful.key({}, "XF86AudioLowerVolume", function() volume_widget:dec(5) end,
+    	      {description = "Decrease volume", group = "Multimedia"}),
+    awful.key({}, "XF86AudioMute", function() volume_widget:toggle() end,
+    	      {description = "Mute toggle", group = "Multimedia"})
 )
 
 clientkeys = gears.table.join(
@@ -584,3 +652,11 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+-- Running startup applications
+awful.util.spawn("nm-applet")
+awful.util.spawn("flameshot")
+-- awful.util.spawn("sleep 1; teams")
+-- awful.util.spawn("sleep 1; snap run teams")
+
+awful.spawn.with_shell("sleep 1; teams")
+awful.spawn.with_shell("sleep 1; snap run teams")
