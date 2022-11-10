@@ -26,7 +26,12 @@ lspconfig.ccls.setup {
 	}
 }
 
-vim.opt.completeopt={"menu","menuone","noselect"}
+vim.opt.completeopt={"menu","menuone","noselect","noinsert","preview"}
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 2
+vim.opt.smartindent = true
+vim.opt.tabstop = 2
+vim.opt.softtabstop = 2
 
   -- Setup nvim-cmp.
   local cmp = require'cmp'
@@ -38,8 +43,8 @@ vim.opt.completeopt={"menu","menuone","noselect"}
       end,
     },
     window = {
-      -- completion = cmp.config.window.bordered(),
-      -- documentation = cmp.config.window.bordered(),
+      completion = cmp.config.window.bordered(),
+      documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
