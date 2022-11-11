@@ -4,3 +4,6 @@
 [submodule "awesome/.config/awesome/keyboard_layout"]
 	path = awesome/.config/awesome/keyboard_layout
 	url = https://github.com/echuraev/keyboard_layout.git
+[submodule "nvim/.config/nvim/lua-language-server"]
+	path = nvim/.config/nvim/lua-language-server
+	url = https://github.com/sumneko/lua-language-server
