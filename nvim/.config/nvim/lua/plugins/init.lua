@@ -34,4 +34,6 @@ return require('packer').startup(function()
 	}
 	use 'marko-cerovac/material.nvim'
 	use 'folke/tokyonight.nvim'
+  use "williamboman/mason.nvim"
+  use "williamboman/mason-lspconfig.nvim"
 end)
