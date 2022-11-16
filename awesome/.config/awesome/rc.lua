@@ -160,7 +160,7 @@ local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 mytextclock = wibox.widget.textclock()
 -- or customized
 local cw = calendar_widget({
-	theme = 'outrun',
+	theme = 'naughty',
 	placement = 'bottom_right',
 	start_sunday = true,
 	radius = 8,
@@ -655,8 +655,8 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 -- Running startup applications
-awful.util.spawn("nm-applet")
-awful.util.spawn("flameshot")
+awful.spawn("nm-applet")
+awful.spawn("flameshot")
 -- awful.util.spawn("sleep 1; teams")
 -- awful.util.spawn("sleep 1; snap run teams")
 

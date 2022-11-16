@@ -34,6 +34,9 @@ theme.tasklist_shape_border_width_focus = dpi(2)
 theme.tasklist_shape_border_color_focus = "#00eeff"
 theme.tasklist_shape = require("gears.shape").octogon
 
+theme.taglist_bg_focus = "#00eeff"
+theme.taglist_fg_focus = "#000000"
+
 -- There are other variable sets
 -- overriding the default one when
 -- defined, the sets are:
@@ -50,7 +53,7 @@ theme.tasklist_shape = require("gears.shape").octogon
 -- Generate taglist squares:
 local taglist_square_size = dpi(4)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_normal
+    taglist_square_size, theme.bg_normal
 )
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
     taglist_square_size, theme.fg_normal
@@ -68,6 +71,10 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 theme.menu_submenu_icon = themes_path.."default/submenu.png"
 theme.menu_height = dpi(15)
 theme.menu_width  = dpi(100)
+theme.menu_bg_normal = theme.bg_normal
+theme.menu_fg_normal = theme.fg_normal
+theme.menu_bg_focus = theme.fg_normal
+theme.menu_fg_focus = theme.bg_normal
 
 -- You can add as many variables as
 -- you wish and access them by using
