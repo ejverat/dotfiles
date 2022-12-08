@@ -36,4 +36,5 @@ return require('packer').startup(function()
 	use 'folke/tokyonight.nvim'
   use "williamboman/mason.nvim"
   use "williamboman/mason-lspconfig.nvim"
+  use "jbyuki/venn.nvim"
 end)

@@ -10,7 +10,7 @@ vim.keymap.set('n','<F5>',":lua require'dap'.continue()<CR>")
 vim.keymap.set('n','<F10>',":lua require'dap'.step_over()<CR>")
 vim.keymap.set('n','<F11>',":lua require'dap'.step_into()<CR>")
 vim.keymap.set('n','<F12>',":lua require'dap'.step_out()<CR>")
-vim.keymap.set('n','<F8>',":lua require'dap'.terminate()<CR>")
+vim.keymap.set('n','<F8>',":lua require'dap'.terminate({cb = require('dapui').close()})<CR>")
 vim.keymap.set('n','<leader>b',":lua require'dap'.toggle_breakpoint()<CR>")
 vim.keymap.set('n','<leader>B',":lua require'dap'.set_breakpoint(vim.fn.input('B condition: '))<CR>")
 vim.keymap.set('n','<leader>lp',":lua require'dap'.set_breakpoint(nil,nil, vim.fn.input('Log point message: '))<CR>")
@@ -95,9 +95,11 @@ dap.listeners.after.event_initialized["dapui_config"] = function()
 end
 
 dap.listeners.before.event_terminated["dapui_config"] = function()
+  print("Session terminated")
 	dapui.close()
 end
 
 dap.listeners.before.event_exited["dapui_config"] = function()
+  print("Session ended")
 	dapui.close()
 end
