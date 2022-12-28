@@ -56,7 +56,7 @@ beautiful.init("/home/"..user.."/.config/awesome/theme.lua")
 -- This is used later as the default terminal and editor to run.
 -- terminal = "x-terminal-emulator"
 terminal = "/usr/local/bin/alacritty"
-file_manager = "/usr/bin/nautilus --new-window"
+file_manager = "/usr/bin/x-file-browser"
 editor = os.getenv("EDITOR") or "editor"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -142,13 +142,6 @@ kbdcfg.widget:buttons(
                        awful.button({ }, 3, function () kbdcfg.menu:toggle() end))
 )
 
-globalkeys = awful.util.table.join(globalkeys,
-    -- Shift-Alt to change keyboard layout
-    awful.key({modkey, "Mod1"}, "k", function () kbdcfg.switch_next() end,
-    {description = "Change keyboard layout", group = "global"})
-    -- Alt-Shift to change keyboard layout
-    -- awful.key({"Mod1"}, "Shift_L", function () kbdcfg.switch_next() end)
-)
 
 -- {{{ Wibar
 -- Create a textclock widget
@@ -419,6 +412,14 @@ globalkeys = gears.table.join(
     	      {description = "Decrease volume", group = "Multimedia"}),
     awful.key({}, "XF86AudioMute", function() volume_widget:toggle() end,
     	      {description = "Mute toggle", group = "Multimedia"})
+)
+
+globalkeys = awful.util.table.join(globalkeys,
+    -- Shift-Alt to change keyboard layout
+    awful.key({modkey}, ".", function () kbdcfg.switch_next() end,
+    {description = "Change keyboard layout", group = "global"})
+    -- Alt-Shift to change keyboard layout
+    -- awful.key({"Mod1"}, "Shift_L", function () kbdcfg.switch_next() end)
 )
 
 clientkeys = gears.table.join(
