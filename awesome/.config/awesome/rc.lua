@@ -655,15 +655,14 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 -- Running startup applications
-awful.spawn("nm-applet")
-
-awful.spawn.with_shell("sleep 1; teams")
-awful.spawn.with_shell("sleep 1; snap run teams")
-
 local has_startup,start_apps = pcall(require,"startup")
 
 if has_startup then
   for key,value in pairs(start_apps["standalone"]) do
     awful.spawn(value)
+  end
+
+  for key,value in pairs(start_apps["with_shell"]) do
+    awful.spawn.with_shell(value)
   end
 end
