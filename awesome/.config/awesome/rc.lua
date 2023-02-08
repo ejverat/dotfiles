@@ -416,7 +416,7 @@ globalkeys = gears.table.join(
 
 globalkeys = awful.util.table.join(globalkeys,
     -- Shift-Alt to change keyboard layout
-    awful.key({modkey}, ".", function () kbdcfg.switch_next() end,
+    awful.key({modkey}, "y", function () kbdcfg.switch_next() end,
     {description = "Change keyboard layout", group = "global"})
     -- Alt-Shift to change keyboard layout
     -- awful.key({"Mod1"}, "Shift_L", function () kbdcfg.switch_next() end)
