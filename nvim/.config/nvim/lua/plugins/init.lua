@@ -37,4 +37,5 @@ return require('packer').startup(function()
   use "williamboman/mason.nvim"
   use "williamboman/mason-lspconfig.nvim"
   use "jbyuki/venn.nvim"
+  use "iamcco/markdown-preview.nvim"
 end)
