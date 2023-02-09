@@ -10,7 +10,8 @@ export ZSH="$HOME/.oh-my-zsh"
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 #ZSH_THEME="robbyrussell"
 #ZSH_THEME="crunch"
-ZSH_THEME="duellj"
+#ZSH_THEME="duellj"
+ZSH_THEME="mortalscumbag"
 #ZSH_THEME="kolo"
 #ZSH_THEME="sorin"
 #ZSH_THEME="sporty_256"
@@ -108,3 +109,7 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 fpath+=${ZDOTDIR:-~}/.zsh_functions
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
