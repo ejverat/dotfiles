@@ -1,15 +1,17 @@
 local applications = {}
-local with_shell = {}
-
+local user = os.getenv("USER")
+local home_dir = "/home/"..user
 
 applications["standalone"] = {
   "flameshot",
   "xscreensaver-systemd",
   "barrierc --name ejverat-luffy 192.168.0.131",
   "lxpolkit",
-  "discord",
-  "element-desktop",
+  "discord --start-minimized",
+  "element-desktop --hidden",
 }
-applications["with_shell"] = with_shell
+applications["with_shell"] = {
+  home_dir.."/.screenlayout/default-2-screens.sh"
+}
 
 return applications

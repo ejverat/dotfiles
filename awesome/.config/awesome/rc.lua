@@ -22,6 +22,9 @@ require("awful.hotkeys_popup.keys")
 local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
+--config notification
+naughty.config.defaults.position = "bottom_right"
+
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
 -- another config (This code will only ever execute for the fallback config)
@@ -144,9 +147,6 @@ kbdcfg.widget:buttons(
 
 
 -- {{{ Wibar
--- Create a textclock widget
-mytextclock = wibox.widget.textclock()
-
 local calendar_widget = require("awesome-wm-widgets.calendar-widget.calendar")
 -- ...
 -- Create a textclock widget
@@ -226,6 +226,10 @@ local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batterya
 
 -- Volume widget
 local volume_widget = require('awesome-wm-widgets.volume-widget.volume')
+-- cpu widget
+local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
+-- ram widget
+local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 -- todo widget
 local todo_widget = require("awesome-wm-widgets.todo-widget.todo")
 
@@ -234,7 +238,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", " " }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -264,34 +268,37 @@ awful.screen.connect_for_each_screen(function(s)
     s.mywibox = awful.wibar({ position = "top", screen = s })
 
     -- Add widgets to the wibox
-    s.mywibox:setup {
-        layout = wibox.layout.align.horizontal,
-        { -- Left widgets
-            layout = wibox.layout.fixed.horizontal,
-            mylauncher,
-            s.mytaglist,
-            s.mypromptbox,
-        },
-        s.mytasklist, -- Middle widget
-        { -- Right widgets
-            layout = wibox.layout.fixed.horizontal,
-	    todo_widget(),
-	    batteryarc_widget({
-		    size = 25,
-		    show_current_level = true,
-		    arc_thickness = 2,
-	    }),
-	    kbdcfg.widget,
-            mykeyboardlayout,
-            wibox.widget.systray(),
-            mytextclock,
-	    volume_widget{
-		    size = 25,
-		    widget_type = 'arc'
-	    },
-            s.mylayoutbox,
-        },
-    }
+  s.mywibox:setup {
+    layout = wibox.layout.align.horizontal,
+    { -- Left widgets
+      layout = wibox.layout.fixed.horizontal,
+      mylauncher,
+      s.mytaglist,
+      s.mypromptbox,
+    },
+    s.mytasklist, -- Middle widget
+    { -- Right widgets
+      layout = wibox.layout.fixed.horizontal,
+      volume_widget{
+        size = 25,
+        widget_type = 'arc'
+      },
+      cpu_widget(),
+      ram_widget(),
+      todo_widget(),
+      batteryarc_widget({
+        size = 25,
+        show_current_level = true,
+        arc_thickness = 2,
+        timeout = 120,
+      }),
+      kbdcfg.widget,
+      mykeyboardlayout,
+      wibox.widget.systray(),
+      mytextclock,
+      s.mylayoutbox,
+    },
+  }
 end)
 -- }}}
 

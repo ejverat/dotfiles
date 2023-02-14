@@ -31,7 +31,7 @@ theme.border_focus  = "#00eeff"
 theme.border_marked = "#91231c"
 
 theme.tasklist_shape_border_width_focus = dpi(2)
-theme.tasklist_shape_border_color_focus = "#00eeff"
+theme.tasklist_shape_border_color_focus = "#00897B"
 theme.tasklist_shape = require("gears.shape").octogon
 
 theme.taglist_bg_focus = "#00eeff"
@@ -46,6 +46,8 @@ theme.taglist_fg_focus = "#000000"
 -- tooltip_[font|opacity|fg_color|bg_color|border_width|border_color]
 -- mouse_finder_[color|timeout|animate_timeout|radius|factor]
 -- prompt_[fg|bg|fg_cursor|bg_cursor|font]
+theme.prompt_bg = theme.fg_normal
+theme.prompt_fg = theme.bg_normal
 -- hotkeys_[bg|fg|border_width|border_color|shape|opacity|modifiers_fg|label_bg|label_fg|group_margin|font|description_font]
 -- Example:
 --theme.taglist_bg_focus = "#ff0000"
@@ -64,10 +66,19 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 -- notification_[bg|fg]
 -- notification_[width|height|margin]
 -- notification_[border_color|border_width|shape|opacity]
+--
+theme.notification_max_width = dpi(300)
+theme.notification_max_height = dpi(200)
+theme.notification_opacity = 0.5
+theme.notification_border_color = theme.fg_normal
+theme.notification_border_width = dpi(2)
+theme.notification_shape = require("gears.shape").rounded_rect
+theme.notification_icon_size = dpi(16)
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
+
 theme.menu_submenu_icon = themes_path.."default/submenu.png"
 theme.menu_height = dpi(15)
 theme.menu_width  = dpi(150)
@@ -127,6 +138,12 @@ theme.layout_cornernw = themes_path.."default/layouts/cornernww.png"
 theme.layout_cornerne = themes_path.."default/layouts/cornernew.png"
 theme.layout_cornersw = themes_path.."default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
+
+-- wibar
+theme.wibar_bg = "#00000088"
+theme.wibar_border_color = theme.fg_normal
+theme.wibar_border_width = dpi(2)
+theme.wibar_shape = require("gears.shape").rounded_rect
 
 -- Generate Awesome icon:
 theme.awesome_icon = theme_assets.awesome_icon(
