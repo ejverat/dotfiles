@@ -11,7 +11,7 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "FiraCode 9"
+theme.font          = "FiraCode Nerd Font 9"
 
 theme.bg_normal     = "#000000"
 theme.bg_focus      = "#000000"
@@ -24,7 +24,7 @@ theme.fg_focus      = "#00eeff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.useless_gap   = dpi(0)
+theme.useless_gap   = dpi(4)
 theme.border_width  = dpi(1)
 theme.border_normal = "#000000"
 theme.border_focus  = "#00eeff"
@@ -70,7 +70,7 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = themes_path.."default/submenu.png"
 theme.menu_height = dpi(15)
-theme.menu_width  = dpi(100)
+theme.menu_width  = dpi(150)
 theme.menu_bg_normal = theme.bg_normal
 theme.menu_fg_normal = theme.fg_normal
 theme.menu_bg_focus = theme.fg_normal

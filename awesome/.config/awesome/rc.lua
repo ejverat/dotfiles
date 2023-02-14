@@ -69,7 +69,6 @@ modkey = "Mod4"
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
-    awful.layout.suit.floating,
     awful.layout.suit.tile,
     awful.layout.suit.tile.left,
     awful.layout.suit.tile.bottom,
@@ -82,6 +81,7 @@ awful.layout.layouts = {
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.magnifier,
     awful.layout.suit.corner.nw,
+    awful.layout.suit.floating,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -99,7 +99,7 @@ myawesomemenu = {
 }
 
 local menu_awesome = { "awesome", myawesomemenu, beautiful.awesome_icon }
-local menu_terminal = { "open terminal", terminal }
+local menu_terminal = { "[] Terminal", terminal }
 
 if has_fdo then
     mymainmenu = freedesktop.menu.build({
@@ -154,7 +154,7 @@ mytextclock = wibox.widget.textclock()
 -- or customized
 local cw = calendar_widget({
 	theme = 'naughty',
-	placement = 'bottom_right',
+	placement = 'top_center',
 	start_sunday = true,
 	radius = 8,
 	-- with customized next/previous (see table above)
@@ -234,7 +234,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "9" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "8", "" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -389,7 +389,7 @@ globalkeys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () awful.screen.focused().mypromptbox:run() end,
+    awful.key({ modkey },            "r",     function () awful.spawn("rofi -show run") end,
               {description = "run prompt", group = "launcher"}),
 
     awful.key({ modkey }, "x",
@@ -411,7 +411,17 @@ globalkeys = gears.table.join(
     awful.key({}, "XF86AudioLowerVolume", function() volume_widget:dec(5) end,
     	      {description = "Decrease volume", group = "Multimedia"}),
     awful.key({}, "XF86AudioMute", function() volume_widget:toggle() end,
-    	      {description = "Mute toggle", group = "Multimedia"})
+    	      {description = "Mute toggle", group = "Multimedia"}),
+--[[
+    awful.key({}, "XF86AudioRaiseVolume", function() awful.spawn.with_shell("pactl set-sink-volume $(pacmd list-sinks | grep '* index:' | cut -b12-) +5%") end,
+    	      {description = "Increase volume", group = "Multimedia"}),
+    awful.key({}, "XF86AudioLowerVolume", function() awful.spawn.with_shell("pactl set-sink-volume $(pacmd list-sinks | grep '* index:' | cut -b12-) -5%") end,
+    	      {description = "Decrease volume", group = "Multimedia"}),
+    awful.key({}, "XF86AudioMute", function() awful.spawn.with_shell("pactl set-sink-mute $(pacmd list-sinks | grep '* index:' | cut -b12-) toggle") end,
+    	      {description = "Mute toggle", group = "Multimedia"}),
+]]--
+    awful.key({ modkey }, "c", function() cw.toggle() end,
+    	      {description = "Show/hide calendar", group = "global"})
 )
 
 globalkeys = awful.util.table.join(globalkeys,
@@ -582,9 +592,9 @@ awful.rules.rules = {
       }, properties = { floating = true }},
 
     -- Add titlebars to normal clients and dialogs
-    { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
-    },
+    -- { rule_any = {type = { "normal", "dialog" }
+      --}, properties = { titlebars_enabled = true }
+    --},
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
     -- { rule = { class = "Firefox" },
@@ -656,6 +666,9 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
 -- Running startup applications
+awful.spawn("nitrogen --restore")
+--awful.spawn("/home/"..user.."/.config/awesome/run-polybar.sh")
+
 local has_startup,start_apps = pcall(require,"startup")
 
 if has_startup then

@@ -8,6 +8,7 @@ applications["standalone"] = {
   "barrierc --name ejverat-luffy 192.168.0.131",
   "lxpolkit",
   "discord",
+  "element-desktop",
 }
 applications["with_shell"] = with_shell
 
