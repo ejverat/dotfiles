@@ -17,10 +17,6 @@ return require('packer').startup(function()
 	use 'nvim-treesitter/nvim-treesitter-context'
 	use 'JoosepAlviste/nvim-ts-context-commentstring'
 	use 'kyazdani42/nvim-web-devicons'
-	use {
-		'nvim-telescope/telescope.nvim',
-		requires = {{'nvim-lua/plenary.nvim'}}
-	}
 	use 'mfussenegger/nvim-dap'
 	use 'rcarriga/nvim-dap-ui'
 	use 'theHamsta/nvim-dap-virtual-text'
@@ -38,4 +34,22 @@ return require('packer').startup(function()
   use "williamboman/mason-lspconfig.nvim"
   use "jbyuki/venn.nvim"
   use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+  use 'kdheepak/lazygit.nvim'
+  use({
+    "nvim-telescope/telescope.nvim",
+    requires = { { "nvim-lua/plenary.nvim" }, { "kdheepak/lazygit.nvim" } },
+    config = function()
+      require("telescope").load_extension("lazygit")
+    end,
+  })
+  
+  use {
+    'lewis6991/gitsigns.nvim',
+    config = function()
+      require('gitsigns').setup()
+    end
+  }
+  use {'akinsho/git-conflict.nvim', tag = "*", config = function()
+    require('git-conflict').setup()
+  end}
 end)
