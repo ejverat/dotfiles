@@ -71,11 +71,12 @@ theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
 theme.notification_max_width = dpi(300)
 theme.notification_max_height = dpi(200)
 theme.notification_opacity = 0.5
-theme.notification_border_color = theme.fg_normal
+theme.notification_border_color = "#00c805"
 theme.notification_border_width = dpi(2)
 theme.notification_shape = require("gears.shape").rounded_rect
 theme.notification_icon_size = dpi(16)
 theme.notification_font          = "DaddyTimeMono Nerd Font 12"
+theme.notification_fg = "#00c805"
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
@@ -143,7 +144,7 @@ theme.layout_cornerse = themes_path.."default/layouts/cornersew.png"
 
 -- wibar
 theme.wibar_bg = "#00000088"
-theme.wibar_border_color = theme.fg_normal
+theme.wibar_border_color = "#00c805"
 theme.wibar_border_width = dpi(2)
 theme.wibar_shape = require("gears.shape").rounded_rect
 
