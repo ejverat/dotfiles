@@ -11,7 +11,8 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "FiraCode Nerd Font 9"
+--theme.font          = "FiraCode Nerd Font 9"
+theme.font          = "ShureTechMono Nerd Font 12"
 
 theme.bg_normal     = "#000000"
 theme.bg_focus      = "#000000"
@@ -74,6 +75,7 @@ theme.notification_border_color = theme.fg_normal
 theme.notification_border_width = dpi(2)
 theme.notification_shape = require("gears.shape").rounded_rect
 theme.notification_icon_size = dpi(16)
+theme.notification_font          = "DaddyTimeMono Nerd Font 12"
 
 -- Variables set for theming the menu:
 -- menu_[bg|fg]_[normal|focus]
