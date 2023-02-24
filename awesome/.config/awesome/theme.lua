@@ -19,6 +19,7 @@ theme.bg_focus      = "#000000"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 theme.bg_systray    = theme.bg_normal
+theme.systray_icon_spacing = dpi(8)
 
 theme.fg_normal     = "#00eeff"
 theme.fg_focus      = "#00eeff"
@@ -34,6 +35,8 @@ theme.border_marked = "#91231c"
 theme.tasklist_shape_border_width_focus = dpi(2)
 theme.tasklist_shape_border_color_focus = "#00897B"
 theme.tasklist_shape = require("gears.shape").octogon
+theme.tasklist_font = "ShureTechMono Nerd Font 9"
+theme.tasklist_font_focus = "ShureTechMono Nerd Font 14"
 
 theme.taglist_bg_focus = "#00eeff"
 theme.taglist_fg_focus = "#000000"
@@ -73,7 +76,7 @@ theme.notification_max_height = dpi(200)
 theme.notification_opacity = 0.5
 theme.notification_border_color = "#00c805"
 theme.notification_border_width = dpi(2)
-theme.notification_shape = require("gears.shape").rounded_rect
+theme.notification_shape = require("gears.shape").infobubble
 theme.notification_icon_size = dpi(16)
 theme.notification_font          = "DaddyTimeMono Nerd Font 12"
 theme.notification_fg = "#00c805"

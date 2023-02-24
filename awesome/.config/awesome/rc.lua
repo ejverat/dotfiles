@@ -23,7 +23,7 @@ local debian = require("debian.menu")
 local has_fdo, freedesktop = pcall(require, "freedesktop")
 
 --config notification
-naughty.config.defaults.position = "bottom_right"
+naughty.config.defaults.position = "top_middle"
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
