@@ -11,35 +11,39 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
+local default_font = "Hurmit Nerd Font"
+
 --theme.font          = "FiraCode Nerd Font 9"
-theme.font = "IntoneMono Nerd Font 11"
+theme.font = default_font .. " 10"
 
 theme.bg_normal = "#000000"
-theme.bg_focus = "#000000"
+theme.fg_normal = "#00ee00"
+
+theme.bg_focus = theme.bg_normal
+theme.fg_focus = theme.fg_normal
+
 theme.bg_urgent = "#ff0000"
 theme.bg_minimize = "#444444"
 theme.bg_systray = theme.bg_normal
 theme.systray_icon_spacing = dpi(8)
 
-theme.fg_normal = "#00eeff"
-theme.fg_focus = "#00eeff"
 theme.fg_urgent = "#ffffff"
 theme.fg_minimize = "#ffffff"
 
-theme.useless_gap = dpi(4)
+theme.useless_gap = dpi(1)
 theme.border_width = dpi(1)
 theme.border_normal = "#000000"
-theme.border_focus = "#00eeff"
+theme.border_focus = "#00ee00"
 theme.border_marked = "#91231c"
 
 theme.tasklist_shape_border_width_focus = dpi(2)
 theme.tasklist_shape_border_color_focus = "#00897B"
 theme.tasklist_shape = require("gears.shape").octogon
-theme.tasklist_font = "IntoneMono Nerd Font 9"
-theme.tasklist_font_focus = "IntoneMono Nerd Font 12"
+theme.tasklist_font = default_font .. " 8"
+theme.tasklist_font_focus = default_font .. " 12"
 
-theme.taglist_bg_focus = "#00eeff"
-theme.taglist_fg_focus = "#000000"
+theme.taglist_bg_focus = theme.fg_normal
+theme.taglist_fg_focus = theme.bg_normal
 
 -- There are other variable sets
 -- overriding the default one when
@@ -74,7 +78,7 @@ theme.notification_border_color = "#00c805"
 theme.notification_border_width = dpi(2)
 theme.notification_shape = require("gears.shape").infobubble
 theme.notification_icon_size = dpi(16)
-theme.notification_font = "DaddyTimeMono Nerd Font 12"
+theme.notification_font = default_font .. " 12"
 theme.notification_fg = "#00c805"
 
 -- Variables set for theming the menu:
@@ -142,7 +146,7 @@ theme.layout_cornersw = themes_path .. "default/layouts/cornersww.png"
 theme.layout_cornerse = themes_path .. "default/layouts/cornersew.png"
 
 -- wibar
-theme.wibar_bg = "#00000088"
+theme.wibar_bg = "#000000"
 theme.wibar_border_color = "#00c805"
 theme.wibar_border_width = dpi(2)
 theme.wibar_shape = require("gears.shape").rounded_rect
