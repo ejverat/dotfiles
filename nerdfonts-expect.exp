@@ -1,0 +1,12 @@
+#!/usr/bin/expect
+
+set url "https://raw.githubusercontent.com/officialrajdeepsingh/nerd-fonts-installer/main/install.sh"
+set script [exec curl -fsSL $url]
+set font [lindex $argv 0]
+
+spawn bash -c $script
+expect "Enter a number: "
+send -- "$font\n"
+
+expect eof
+puts "Complete fonts installation"
