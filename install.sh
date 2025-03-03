@@ -8,12 +8,17 @@ exit
 
 # refresh group && install basic software
 newgrp sudo
-sudo apt -y install git curl lxpolkit expect stow
+sudo apt -y install git curl lxpolkit expect stow meson fzf bat fd-find flameshot pavucontrol
 
 # cargo / rust
 exec ./install-cargo-rust.exp
 source ~/.cargo/env
 cargo install tree-sitter-cli
+cargo install ripgrep
+
+#install NodeJs
+sudo curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
+sudo apt install nodejs -y
 
 # Stow
 stow .
@@ -67,3 +72,24 @@ sudo apt install blueman
 
 # Install nerd fonts
 exec ./nerdfonts-expect.exp 21
+
+# Install rofi
+exec ./install-rofi.sh
+
+# Install graphics ROCm
+exec ./install-rocm.sh
+
+# Install graphics ROCm
+exec ./install-rocm.sh
+
+# Install teams
+exec ./install-teams.sh
+
+# Latex
+sudo apt install -y textlive-full textstudio
+
+# zsh
+sudo apt install -y zsh
+chsh -s $(which zsh)
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+#git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
