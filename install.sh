@@ -8,7 +8,7 @@ exit
 
 # refresh group && install basic software
 newgrp sudo
-sudo apt -y install git curl lxpolkit expect stow meson fzf bat fd-find flameshot pavucontrol
+sudo apt -y install git curl lxpolkit expect stow meson fzf bat fd-find flameshot pavucontrol xscreensaver xscreensaver-gl-extra
 
 # cargo / rust
 exec ./install-cargo-rust.exp

@@ -4,6 +4,7 @@ return {
 	standalone = {
 		"flameshot",
 		"lxpolkit",
+		"xscreensaver --no-splash",
 	},
 	with_shell = { screen_config },
 }
