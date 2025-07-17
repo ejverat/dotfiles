@@ -248,6 +248,8 @@ local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 local ram_widget = require("awesome-wm-widgets.ram-widget.ram-widget")
 -- todo widget
 local todo_widget = require("awesome-wm-widgets.todo-widget.todo")
+-- brightness widget
+local brightness_widget = require("awesome-wm-widgets.brightness-widget.brightness")
 
 awful.screen.connect_for_each_screen(function(s)
 	-- Wallpaper
@@ -309,6 +311,11 @@ awful.screen.connect_for_each_screen(function(s)
 			volume_widget({
 				size = 25,
 				widget_type = "arc",
+			}),
+			brightness_widget({
+				type = "arc",
+				program = "light",
+				step = 10,
 			}),
 			cpu_widget(),
 			ram_widget(),
@@ -446,6 +453,12 @@ globalkeys = gears.table.join(
 	awful.key({}, "XF86AudioMute", function()
 		volume_widget:toggle()
 	end, { description = "Mute toggle", group = "Multimedia" }),
+	awful.key({}, "XF86MonBrightnessUp", function()
+		brightness_widget:inc()
+	end, { description = "Increase brightness", group = "custom" }),
+	awful.key({}, "XF86MonBrightnessDown", function()
+		brightness_widget:dec()
+	end, { description = "Decrease brightness", group = "custom" }),
 	--[[
     awful.key({}, "XF86AudioRaiseVolume", function() awful.spawn.with_shell("pactl set-sink-volume $(pacmd list-sinks | grep '* index:' | cut -b12-) +5%") end,
     	      {description = "Increase volume", group = "Multimedia"}),
