@@ -238,7 +238,10 @@ screen.connect_signal("property::geometry", set_wallpaper)
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 
 -- Volume widget
-local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+-- for pacmd
+-- local volume_widget = require("awesome-wm-widgets.volume-widget.volume")
+-- for pactl
+local volume_widget = require("awesome-wm-widgets.pactl-widget.volume")
 -- cpu widget
 local cpu_widget = require("awesome-wm-widgets.cpu-widget.cpu-widget")
 -- ram widget
