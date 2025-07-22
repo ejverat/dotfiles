@@ -1,17 +1,9 @@
 #!/bin/bash
 
-# add user to sudo group
-su -
-usermod -aG sudo $USER
-logout
-exit
+exec ./install_global_dependencies.sh
 
-# refresh group && install basic software
-newgrp sudo
-sudo apt -y install git curl lxpolkit expect stow meson fzf bat fd-find flameshot pavucontrol xscreensaver xscreensaver-gl-extra lxappearance
+exec ./install-cargo-rust.sh
 
-# cargo / rust
-# exec ./install-cargo-rust.exp
 source ~/.cargo/env
 cargo install tree-sitter-cli
 cargo install ripgrep
@@ -20,21 +12,7 @@ cargo install ripgrep
 sudo curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash -
 sudo apt install nodejs -y
 
-# Stow
-stow .
-
-# install latest neovim
-pushd /tmp
-git clone https://github.com/neovim/neovim.git
-pushd neovim
-git checkout stable
-sudo apt -y build-dep neovim
-make CMAKE_BUILD_TYPE=RelWithDebInfo
-pushd build
-cpack -G DEB && sudo apt -y install ./nvim-linux-*.deb
-popd
-popd
-popd
+exec ./install-nvim.sh
 
 #install wezterm
 pushd /tmp
@@ -71,7 +49,7 @@ popd
 popd
 
 # Blueman
-sudo apt install blueman
+sudo apt install -y blueman
 
 # Install nerd fonts
 exec ./nerdfonts-expect.exp 21
@@ -80,13 +58,15 @@ exec ./nerdfonts-expect.exp 21
 exec ./install-rofi.sh
 
 # Install graphics ROCm
-exec ./install-rocm.sh
+# exec ./install-rocm.sh
 
 # Install teams
 #exec ./install-teams.sh
 
 # Latex
 sudo apt install -y textlive-full textstudio
+
+exec ./install_dotfiles.sh
 
 # zsh
 sudo apt install -y zsh
