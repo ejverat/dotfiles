@@ -7,8 +7,10 @@ sudo apt -y install stow
 DIR="$(dirname $0)"
 
 # Stow
-cd $DIR/../home
+pushd $DIR/../home
 stow .
+popd
 
-cd $DIR/../config
+pushd $DIR/../config
 stow .
+popd
