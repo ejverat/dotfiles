@@ -12,7 +12,7 @@ return {
   },
   {
     -- Ensure rust debugger is installed
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     optional = true,
     opts = function(_, opts)
       if type(opts.ensure_installed) == "table" then
@@ -22,12 +22,11 @@ return {
   },
   {
     "mrcjkb/rustaceanvim",
-    version = "^5",
+    version = "^7",
     lazy = false,
     config = function()
-      local mason_registry = require("mason-registry")
-      local codelldb = mason_registry.get_package("codelldb")
-      local extension_path = codelldb:get_install_path() .. "/extension/"
+      local mason_root = vim.fn.stdpath("data") .. "/mason"
+      local extension_path = mason_root .. "/packages/codelldb/extension/"
       local codelldb_path = extension_path .. "adapter/codelldb"
       local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
       local cfg = require("rustaceanvim.config")
