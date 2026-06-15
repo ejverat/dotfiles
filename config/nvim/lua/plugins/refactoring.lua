@@ -3,6 +3,7 @@ return {
     "ThePrimeagen/refactoring.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
+      "lewis6991/async.nvim",
       "nvim-lua/plenary.nvim",
       "nvim-treesitter/nvim-treesitter",
     },
@@ -118,7 +119,7 @@ return {
       require("refactoring").setup(opts)
       if LazyVim.has("telescope.nvim") then
         LazyVim.on_load("telescope.nvim", function()
-          require("telescope").load_extension("refactoring")
+          pcall(require("telescope").load_extension, "refactoring")
         end)
       end
     end,
