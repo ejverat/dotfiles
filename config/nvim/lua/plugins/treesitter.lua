@@ -3,40 +3,9 @@ return {
     "nvim-treesitter/nvim-treesitter",
     lazy = false,
     dependencies = { "OXY2DEV/markview.nvim" },
-    opts = {
-      highlight = { enable = true },
-      indent = { enable = true },
-      ensure_installed = {
-        "bash",
-        "c",
-        "c_sharp",
-        "cmake",
-        "cpp",
-        "diff",
-        "html",
-        "javascript",
-        "jsdoc",
-        "json",
-        "jsonc",
-        "latex",
-        "lua",
-        "luadoc",
-        "luap",
-        "markdown",
-        "markdown_inline",
-        "printf",
-        "python",
-        "query",
-        "regex",
-        "toml",
-        "tsx",
-        "typescript",
-        "vim",
-        "vimdoc",
-        "xml",
-        "yaml",
-      },
-      incremental_selection = {
+    opts = function(_, opts)
+      opts.ensure_installed = {} -- pre-installed by Nix
+      opts.incremental_selection = {
         enable = true,
         keymaps = {
           init_selection = "<C-space>",
@@ -44,8 +13,8 @@ return {
           scope_incremental = false,
           node_decremental = "<bs>",
         },
-      },
-      textobjects = {
+      }
+      opts.textobjects = {
         move = {
           enable = true,
           goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
@@ -53,7 +22,8 @@ return {
           goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
           goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
         },
-      },
-    },
+      }
+      return opts
+    end,
   },
 }
